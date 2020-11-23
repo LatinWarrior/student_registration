@@ -1,20 +1,77 @@
-// student_registration.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <sstream>
 
-int main()
+#include "book.h"
+#include "student.h"
+#include "student_list.h"
+
+using namespace std;
+
+int main(int argc, char** argv)
 {
-    std::cout << "Hello World!\n";
+
+    Book book1 = Book("The Iliad", "Homer Simpson", 599);
+    Book book2 = Book("The Window", "Peter Griffin", 348);
+
+    vector<Book> books;
+
+    books.push_back(book1);
+    books.push_back(book2);
+
+    student_list students;
+
+    for (int i = 0; i < books.size(); i++) {
+        cout << "Author: " << books[i].getAuthor() << endl;
+    }
+
+    int choice = 0;
+
+    while (choice != -1)
+    {
+        cout << endl
+            << "## (College Student Tuition) ##" << endl;
+        cout << endl
+            << "1 Add Student Details";
+        cout << endl
+            << "2 Print Student Names";
+        cout << endl
+            << "-1 Exit";
+        cout << "\n\n Enter your choice : ";
+        cin >> choice;
+
+        // cout << endl << "Press any key to add Students details\n";
+        getchar();
+
+        switch (choice)
+        {
+        case 1:
+        {
+            cout << endl << "\n Enter Name of Student: ";
+            string name;
+            getline(cin, name);
+            students.addStudent(name);
+        }
+        break;
+        case 2:
+            students.printStudents();
+            break;
+        case -1:
+            cout << endl
+                << "thank you for using this thing!!";
+            break;
+        default: {
+            cout << endl
+                << "Invalid Choice..";
+            getchar();
+        }
+
+        }
+    }
+
+
+
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
